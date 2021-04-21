@@ -382,3 +382,4 @@ obj/
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/dotnetcore,vscode,csharp
+bin/Debug/*

@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using backendproject.Models;
+using Microsoft.AspNetCore.Routing;
 
 namespace backendproject.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("medias")]
     public class MediaController : ControllerBase
     {
         // testing
@@ -22,17 +23,31 @@ namespace backendproject.Controllers
                 MovieId = Guid.NewGuid(),
                 Name = "Cool movie",
                 Type = "Movie",
-                Date = new DateTime(1999, 9, 10),
+                ReleaseDate = new DateTime(1999, 9, 10),
                 Length = 150.0,
                 Episodes = 1,
             });
         }
 
-
         [HttpGet]
         public ActionResult<List<Media>> GetMedias()
         {
             return _medias;
+        }
+
+        [HttpGet]
+        [Route("medias/{mediaid}")]
+        public ActionResult<Media> GetMedia(Guid mediaid)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPost]
+        [Route("medias/addmedia")]
+        public ActionResult AddMedia()
+        {
+            // todo: only admin can add media
+            throw new NotImplementedException();
         }
     }
 }
