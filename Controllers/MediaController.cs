@@ -6,44 +6,39 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using backendproject.Models;
 using Microsoft.AspNetCore.Routing;
+using backendproject.DataContext;
+using backendproject.Services;
 
 namespace backendproject.Controllers
 {
     [ApiController]
-    [Route("medias")]
+    [Route("media")]
     public class MediaController : ControllerBase
     {
-        // testing
-        private static List<Media> _medias = new List<Media>();
+        private readonly IMediaService _mediaService;
+        private readonly ILogger<MediaController> _logger;
 
-        public MediaController(ILogger<UserController> logger)
+        public MediaController(IMediaService mediaService, ILogger<MediaController> logger)
         {
-            _medias.Add(new Media()
-            {
-                MovieId = Guid.NewGuid(),
-                Name = "Cool movie",
-                Type = "Movie",
-                ReleaseDate = new DateTime(1999, 9, 10),
-                Length = 150.0,
-                Episodes = 1,
-            });
+            _mediaService = mediaService;
+            _logger = logger;
         }
 
         [HttpGet]
-        public ActionResult<List<Media>> GetMedias()
+        public async Task<ActionResult<List<Media>>> GetMedias()
         {
-            return _medias;
+            return await _mediaService.GetMedias();
         }
 
         [HttpGet]
-        [Route("medias/{mediaid}")]
+        [Route("media/{mediaid}")]
         public ActionResult<Media> GetMedia(Guid mediaid)
         {
             throw new NotImplementedException();
         }
 
         [HttpPost]
-        [Route("medias/addmedia")]
+        [Route("media/addmedia")]
         public ActionResult AddMedia()
         {
             // todo: only admin can add media

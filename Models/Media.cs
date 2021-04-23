@@ -8,7 +8,7 @@ namespace backendproject.Models
     public class Media
     {
         [Key]
-        public Guid MovieId { get; set; }
+        public Guid MediaId { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
         public DateTime ReleaseDate { get; set; }

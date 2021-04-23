@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using backendproject.Configuration;
 using backendproject.DataContext;
+using backendproject.Repositories;
+using backendproject.Services;
 
 namespace backendproject
 {
@@ -36,6 +38,10 @@ namespace backendproject
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "backendproject", Version = "v1" });
             });
+
+            services.AddTransient<IMediaContext, MediaContext>();
+            services.AddTransient<IMediaRepository, MediaRepository>();
+            services.AddTransient<IMediaService, MediaService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
