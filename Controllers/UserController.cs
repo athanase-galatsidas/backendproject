@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using backendproject.Models;
+using backendproject.Services;
 
 namespace backendproject.Controllers
 {
@@ -12,31 +13,21 @@ namespace backendproject.Controllers
     [Route("users")]
     public class UserController : ControllerBase
     {
+        private readonly IUserService _userService;
         private readonly ILogger<UserController> _logger;
-        private static List<User> _users = new List<User>();
 
-        public UserController(ILogger<UserController> logger)
+        public UserController(IUserService userService, ILogger<UserController> logger)
         {
+            _userService = userService;
             _logger = logger;
-
-            _users.Add(new User()
-            {
-                UserId = new Guid(),
-                Name = "bob",
-                Email = "user@email.com",
-                Password = "1234",
-                IsAdmin = false,
-                Entries = new List<Entry>()
-            });
         }
 
-
         [HttpGet]
-        public ActionResult<List<User>> GetUsers()
+        public async Task<ActionResult<List<User>>> GetUsers()
         {
             try
             {
-                return new OkObjectResult(_users);
+                return await _userService.GetUsers();
             }
             catch
             {

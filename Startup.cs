@@ -30,6 +30,7 @@ namespace backendproject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
             services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
             services.AddDbContext<MediaContext>();
 
@@ -41,7 +42,8 @@ namespace backendproject
 
             services.AddTransient<IMediaContext, MediaContext>();
             services.AddTransient<IMediaRepository, MediaRepository>();
-            services.AddTransient<IMediaService, MediaService>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

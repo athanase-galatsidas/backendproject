@@ -17,6 +17,9 @@ namespace backendproject.DataContext
     public interface IMediaContext
     {
         DbSet<Media> Medias { get; set; }
+        DbSet<User> Users { get; set; }
+        DbSet<Entry> Entries { get; set; }
+        DbSet<Actor> Actors { get; set; }
         int SaveChanges();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
@@ -24,6 +27,10 @@ namespace backendproject.DataContext
     public class MediaContext : DbContext, IMediaContext
     {
         public DbSet<Media> Medias { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Entry> Entries { get; set; }
+        public DbSet<Actor> Actors { get; set; }
+
         private ConnectionStrings _connectionStrings;
 
         public MediaContext(DbContextOptions<MediaContext> options, IOptions<ConnectionStrings> connectionStrings) : base(options)
@@ -39,6 +46,23 @@ namespace backendproject.DataContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Entry>().HasKey(e => new { e.UserId, e.MediaId });
+
+            modelBuilder.Entity<User>().HasData(new User()
+            {
+                UserId = Guid.NewGuid(),
+                Name = "Bob",
+                Email = "bob@email.com",
+                Password = "1234",
+                IsAdmin = false,
+            });
+
+            modelBuilder.Entity<Actor>().HasData(new Actor()
+            {
+                ActorId = Guid.NewGuid(),
+                Name = "Rainn Wilson"
+            });
+
             modelBuilder.Entity<Media>().HasData(new Media()
             {
                 MediaId = Guid.NewGuid(),
@@ -56,7 +80,7 @@ namespace backendproject.DataContext
                 Type = "Series",
                 Episodes = 6,
                 Length = 20,
-                ReleaseDate = new DateTime(2005, 4, 22)
+                ReleaseDate = new DateTime(2005, 4, 22),
             });
         }
     }

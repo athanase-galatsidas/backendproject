@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using backendproject.Models;
 using backendproject.Repositories;
 
@@ -14,9 +15,11 @@ namespace backendproject.Services
     public class MediaService : IMediaService
     {
         private IMediaRepository _mediaRepository;
+        private IMapper _mapper;
 
-        public MediaService(IMediaRepository mediaRepository)
+        public MediaService(IMapper mapper, IMediaRepository mediaRepository)
         {
+            _mapper = mapper;
             _mediaRepository = mediaRepository;
         }
 
