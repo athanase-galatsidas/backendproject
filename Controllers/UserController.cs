@@ -10,7 +10,7 @@ using backendproject.Services;
 namespace backendproject.Controllers
 {
     [ApiController]
-    [Route("users")]
+    [Route("api/users")]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -27,7 +27,7 @@ namespace backendproject.Controllers
         {
             try
             {
-                return await _userService.GetUsers();
+                return new OkObjectResult(await _userService.GetUsers());
             }
             catch
             {
@@ -36,17 +36,45 @@ namespace backendproject.Controllers
         }
 
         [HttpGet]
-        [Route("users/{userid}")]
-        public ActionResult<User> GetUser(Guid userid)
+        [Route("{userId}")]
+        public async Task<ActionResult<User>> GetUser(Guid userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return new OkObjectResult(await _userService.GetUser(userId));
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
         }
 
         [HttpPost]
-        [Route("users/addentry")]
-        public ActionResult AddEntry()
+        [Route("adduser")]
+        public async Task<ActionResult<User>> AddUser(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return new OkObjectResult(await _userService.AddUser(user));
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
+        }
+
+        [HttpPost]
+        [Route("addentry")]
+        public async Task<ActionResult<Entry>> AddEntry(Entry entry)
+        {
+            try
+            {
+                return new OkObjectResult(await _userService.AddEntry(entry));
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
         }
     }
 }

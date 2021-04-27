@@ -12,7 +12,7 @@ using backendproject.Services;
 namespace backendproject.Controllers
 {
     [ApiController]
-    [Route("media")]
+    [Route("api/media")]
     public class MediaController : ControllerBase
     {
         private readonly IMediaService _mediaService;
@@ -27,22 +27,42 @@ namespace backendproject.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Media>>> GetMedias()
         {
-            return await _mediaService.GetMedias();
+            try
+            {
+                return new OkObjectResult(await _mediaService.GetMedias());
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
         }
 
         [HttpGet]
-        [Route("media/{mediaid}")]
-        public ActionResult<Media> GetMedia(Guid mediaid)
+        [Route("{mediaId}")]
+        public async Task<ActionResult<Media>> GetMedia(Guid mediaId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return new OkObjectResult(await _mediaService.GetMedia(mediaId));
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
         }
 
         [HttpPost]
-        [Route("media/addmedia")]
-        public ActionResult AddMedia()
+        [Route("addmedia")]
+        public async Task<ActionResult<Media>> AddMedia(Media media)
         {
-            // todo: only admin can add media
-            throw new NotImplementedException();
+            try
+            {
+                return new OkObjectResult(await _mediaService.AddMedia(media));
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
         }
     }
 }

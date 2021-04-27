@@ -10,6 +10,8 @@ namespace backendproject.Services
     public interface IMediaService
     {
         Task<List<Media>> GetMedias();
+        Task<Media> GetMedia(Guid mediaId);
+        Task<Media> AddMedia(Media media);
     }
 
     public class MediaService : IMediaService
@@ -26,6 +28,18 @@ namespace backendproject.Services
         public async Task<List<Media>> GetMedias()
         {
             return await _mediaRepository.GetMedias();
+        }
+
+        public async Task<Media> GetMedia(Guid mediaId)
+        {
+            return await _mediaRepository.GetMedia(mediaId);
+        }
+
+        public async Task<Media> AddMedia(Media media)
+        {
+            media.MediaId = Guid.NewGuid();
+            media.Actors = new List<Actor>();
+            return await _mediaRepository.AddMedia(media);
         }
     }
 }
