@@ -15,6 +15,9 @@ using backendproject.Configuration;
 using backendproject.DataContext;
 using backendproject.Repositories;
 using backendproject.Services;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace backendproject
 {
@@ -35,6 +38,18 @@ namespace backendproject
             services.AddDbContext<MediaContext>();
 
             services.AddControllers();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.Authority = "https://dev-uyumsaeu.eu.auth0.com/";
+                options.Audience = "https://backendAPI";
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "backendproject", Version = "v1" });
@@ -59,6 +74,8 @@ namespace backendproject
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

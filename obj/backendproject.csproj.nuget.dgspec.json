@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Schoolwerk\\backendproject\\backendproject.csproj": {}
+    "e:\\Schoolwerk\\backendproject\\backendproject.csproj": {}
   },
   "projects": {
-    "E:\\Schoolwerk\\backendproject\\backendproject.csproj": {
+    "e:\\Schoolwerk\\backendproject\\backendproject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Schoolwerk\\backendproject\\backendproject.csproj",
+        "projectUniqueName": "e:\\Schoolwerk\\backendproject\\backendproject.csproj",
         "projectName": "backendproject",
-        "projectPath": "E:\\Schoolwerk\\backendproject\\backendproject.csproj",
+        "projectPath": "e:\\Schoolwerk\\backendproject\\backendproject.csproj",
         "packagesPath": "C:\\Users\\LordSwaglington\\.nuget\\packages\\",
-        "outputPath": "E:\\Schoolwerk\\backendproject\\obj\\",
+        "outputPath": "e:\\Schoolwerk\\backendproject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -54,6 +54,10 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[8.1.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[5.0.5, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
