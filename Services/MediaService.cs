@@ -38,7 +38,7 @@ namespace backendproject.Services
         public async Task<Media> AddMedia(Media media)
         {
             media.MediaId = Guid.NewGuid();
-            media.Actors = new List<Actor>();
+            media.MediaActors = new List<MediaActor>();
             return await _mediaRepository.AddMedia(media);
         }
     }

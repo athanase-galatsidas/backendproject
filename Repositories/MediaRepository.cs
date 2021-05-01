@@ -32,7 +32,7 @@ namespace backendproject.Repositories
         public async Task<Media> GetMedia(Guid mediaId)
         {
             return await _context.Medias.Where(e => e.MediaId == mediaId)
-            .Include(e => e.Actors)
+            .Include(e => e.MediaActors)
             .SingleOrDefaultAsync();
         }
 

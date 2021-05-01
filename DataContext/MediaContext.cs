@@ -20,6 +20,7 @@ namespace backendproject.DataContext
         DbSet<User> Users { get; set; }
         DbSet<Entry> Entries { get; set; }
         DbSet<Actor> Actors { get; set; }
+        DbSet<MediaActor> MediaActors { get; set; }
         int SaveChanges();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
@@ -30,6 +31,7 @@ namespace backendproject.DataContext
         public DbSet<User> Users { get; set; }
         public DbSet<Entry> Entries { get; set; }
         public DbSet<Actor> Actors { get; set; }
+        public DbSet<MediaActor> MediaActors { get; set; }
 
         private ConnectionStrings _connectionStrings;
 
@@ -47,6 +49,7 @@ namespace backendproject.DataContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Entry>().HasKey(e => new { e.UserId, e.MediaId });
+            modelBuilder.Entity<MediaActor>().HasKey(e => new { e.MediaId, e.ActorId });
 
             modelBuilder.Entity<User>().HasData(new User()
             {
