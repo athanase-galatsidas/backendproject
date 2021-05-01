@@ -8,9 +8,12 @@ using backendproject.Models;
 using Microsoft.AspNetCore.Routing;
 using backendproject.DataContext;
 using backendproject.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
 
 namespace backendproject.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/media")]
     public class MediaController : ControllerBase
