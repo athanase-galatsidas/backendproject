@@ -9,7 +9,6 @@ namespace backendproject.Models
     {
         [Key]
         public Guid MediaId { get; set; }
-        [Required]
         public string Name { get; set; }
         public string Type { get; set; }
         public DateTime ReleaseDate { get; set; }

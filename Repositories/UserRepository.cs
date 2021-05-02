@@ -12,6 +12,7 @@ namespace backendproject.Repositories
     {
         Task<List<User>> GetUsers();
         Task<User> GetUser(Guid userId);
+        Task<List<Entry>> GetUserEntries(Guid userId);
         Task<User> AddUser(User user);
         Task<Entry> AddEntry(Entry entry);
     }
@@ -27,7 +28,7 @@ namespace backendproject.Repositories
 
         public async Task<List<User>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.Include(e => e.Entries).ToListAsync();
         }
 
         public async Task<User> GetUser(Guid userId)
@@ -49,6 +50,11 @@ namespace backendproject.Repositories
             await _context.Entries.AddAsync(entry);
             await _context.SaveChangesAsync();
             return entry;
+        }
+
+        public async Task<List<Entry>> GetUserEntries(Guid userId)
+        {
+            return await _context.Entries.Where(e => e.UserId == userId).ToListAsync();
         }
     }
 }

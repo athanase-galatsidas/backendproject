@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using backendproject.DTO;
 using backendproject.Models;
 using backendproject.Repositories;
 
@@ -11,7 +12,7 @@ namespace backendproject.Services
     {
         Task<List<Media>> GetMedias();
         Task<Media> GetMedia(Guid mediaId);
-        Task<Media> AddMedia(Media media);
+        Task<MediaDTO> AddMedia(MediaDTO media);
     }
 
     public class MediaService : IMediaService
@@ -35,11 +36,14 @@ namespace backendproject.Services
             return await _mediaRepository.GetMedia(mediaId);
         }
 
-        public async Task<Media> AddMedia(Media media)
+        public async Task<MediaDTO> AddMedia(MediaDTO media)
         {
-            media.MediaId = Guid.NewGuid();
-            media.MediaActors = new List<MediaActor>();
-            return await _mediaRepository.AddMedia(media);
+            Media newMedia = _mapper.Map<Media>(media);
+            newMedia.MediaId = Guid.NewGuid();
+            newMedia.MediaActors = new List<MediaActor>();
+            await _mediaRepository.AddMedia(newMedia);
+
+            return media;
         }
     }
 }

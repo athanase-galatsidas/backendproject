@@ -8,6 +8,7 @@ using backendproject.Models;
 using backendproject.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Routing;
 
 namespace backendproject.Controllers
 {
@@ -59,6 +60,20 @@ namespace backendproject.Controllers
             try
             {
                 return new OkObjectResult(await _userService.AddUser(user));
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
+        }
+
+        [HttpGet]
+        [Route("{userId}/entries")]
+        public async Task<ActionResult<List<Entry>>> GetUserEntries(Guid userId)
+        {
+            try
+            {
+                return new OkObjectResult(await _userService.GetUserEntries(userId));
             }
             catch
             {

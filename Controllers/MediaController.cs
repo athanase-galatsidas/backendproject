@@ -10,6 +10,7 @@ using backendproject.DataContext;
 using backendproject.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
+using backendproject.DTO;
 
 namespace backendproject.Controllers
 {
@@ -56,7 +57,7 @@ namespace backendproject.Controllers
 
         [HttpPost]
         [Route("addmedia")]
-        public async Task<ActionResult<Media>> AddMedia(Media media)
+        public async Task<ActionResult<MediaDTO>> AddMedia(MediaDTO media)
         {
             try
             {
@@ -67,7 +68,5 @@ namespace backendproject.Controllers
                 return new StatusCodeResult(500);
             }
         }
-
-
     }
 }

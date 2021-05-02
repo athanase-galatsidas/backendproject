@@ -59,6 +59,7 @@ namespace backendproject
             services.AddTransient<IMediaRepository, MediaRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IMediaService, MediaService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
