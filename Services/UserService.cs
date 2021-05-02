@@ -14,6 +14,7 @@ namespace backendproject.Services
         Task<List<Entry>> GetUserEntries(Guid userId);
         Task<User> AddUser(User user);
         Task<Entry> AddEntry(Entry entry);
+        Task<Entry> UpdateEntry(Entry entry);
     }
 
     public class UserService : IUserService
@@ -48,6 +49,11 @@ namespace backendproject.Services
         public async Task<Entry> AddEntry(Entry entry)
         {
             return await _userRepository.AddEntry(entry);
+        }
+
+        public async Task<Entry> UpdateEntry(Entry entry)
+        {
+            return await _userRepository.UpdateEntry(entry);
         }
 
         public async Task<List<Entry>> GetUserEntries(Guid userId)

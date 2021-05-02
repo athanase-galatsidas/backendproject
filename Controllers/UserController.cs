@@ -94,5 +94,19 @@ namespace backendproject.Controllers
                 return new StatusCodeResult(500);
             }
         }
+
+        [HttpPut]
+        [Route("updateentry")]
+        public async Task<ActionResult<Entry>> UpdateEntry(Entry entry)
+        {
+            try
+            {
+                return new OkObjectResult(await _userService.UpdateEntry(entry));
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
+        }
     }
 }
