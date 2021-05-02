@@ -13,10 +13,11 @@ services:
         volumes:
             - C:\db\data:/var/opt/mssql/data
     api:
-        image: backendproject
-        build:
-            context: .
-            dockerfile: ./Dockerfile
+        image: lordswaglington/backendproject
+        # image: backendproject
+        # build:
+        #     context: .
+        #     dockerfile: ./Dockerfile
         environment:
             - ASPNETCORE_URLS=http://+:5000
             - ASPNETCORE_ENVIRONMENT=Docker
