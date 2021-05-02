@@ -13,6 +13,9 @@ namespace backendproject.Services
         Task<List<Media>> GetMedias();
         Task<Media> GetMedia(Guid mediaId);
         Task<MediaDTO> AddMedia(MediaDTO media);
+        Task<List<Actor>> GetActors();
+        Task<Actor> GetActor(Guid actorId);
+        Task<Actor> AddActor(Actor actor);
     }
 
     public class MediaService : IMediaService
@@ -44,6 +47,21 @@ namespace backendproject.Services
             await _mediaRepository.AddMedia(newMedia);
 
             return media;
+        }
+
+        public async Task<List<Actor>> GetActors()
+        {
+            return await _mediaRepository.GetActors();
+        }
+
+        public async Task<Actor> GetActor(Guid actorId)
+        {
+            return await _mediaRepository.GetActor(actorId);
+        }
+
+        public async Task<Actor> AddActor(Actor actor)
+        {
+            return await _mediaRepository.AddActor(actor);
         }
     }
 }

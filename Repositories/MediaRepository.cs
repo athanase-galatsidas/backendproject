@@ -13,6 +13,9 @@ namespace backendproject.Repositories
         Task<List<Media>> GetMedias();
         Task<Media> GetMedia(Guid mediaId);
         Task<Media> AddMedia(Media media);
+        Task<List<Actor>> GetActors();
+        Task<Actor> GetActor(Guid actorId);
+        Task<Actor> AddActor(Actor actor);
     }
 
     public class MediaRepository : IMediaRepository
@@ -41,6 +44,23 @@ namespace backendproject.Repositories
             await _context.Medias.AddAsync(media);
             await _context.SaveChangesAsync();
             return media;
+        }
+
+        public async Task<List<Actor>> GetActors()
+        {
+            return await _context.Actors.ToListAsync();
+        }
+
+        public async Task<Actor> GetActor(Guid actorId)
+        {
+            return await _context.Actors.Where(e => e.ActorId == actorId).SingleOrDefaultAsync();
+        }
+
+        public async Task<Actor> AddActor(Actor actor)
+        {
+            await _context.Actors.AddAsync(actor);
+            await _context.SaveChangesAsync();
+            return actor;
         }
     }
 }

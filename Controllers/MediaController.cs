@@ -68,5 +68,47 @@ namespace backendproject.Controllers
                 return new StatusCodeResult(500);
             }
         }
+
+        [HttpGet]
+        [Route("actors")]
+        public async Task<ActionResult<List<Actor>>> GetActors()
+        {
+            try
+            {
+                return new OkObjectResult(await _mediaService.GetActors());
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
+        }
+
+        [HttpGet]
+        [Route("actors/{actorid}")]
+        public async Task<ActionResult<List<Actor>>> GetActor(Guid actorId)
+        {
+            try
+            {
+                return new OkObjectResult(await _mediaService.GetActor(actorId));
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
+        }
+
+        [HttpPost]
+        [Route("addactor")]
+        public async Task<ActionResult<Actor>> AddActor(Actor actor)
+        {
+            try
+            {
+                return new OkObjectResult(await _mediaService.AddActor(actor));
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
+        }
     }
 }
