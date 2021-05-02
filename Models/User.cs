@@ -14,7 +14,6 @@ namespace backendproject.Models
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
 
-        [JsonIgnore]
-        public List<Entry> Entries { get; set; }
+        public ICollection<Entry> Entries { get; set; }
     }
 }

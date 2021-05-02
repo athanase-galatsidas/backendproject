@@ -35,9 +35,9 @@ namespace backendproject.Repositories
 
         public async Task<User> GetUser(Guid userId)
         {
-            return await _context.Users.Where(e => e.UserId == userId)
-            .Include(e => e.Entries)
-            .SingleOrDefaultAsync();
+            User user = await _context.Users.Where(e => e.UserId == userId).SingleOrDefaultAsync();
+            user.Entries = await _context.Entries.Where(e => e.UserId == userId).ToListAsync();
+            return user;
         }
 
         public async Task<User> AddUser(User user)
