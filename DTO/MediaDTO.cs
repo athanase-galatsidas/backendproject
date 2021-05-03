@@ -12,6 +12,6 @@ namespace backendproject.DTO
         public double Length { get; set; }
         public int Episodes { get; set; }
         public double Rating { get; set; }
-        public List<MediaActor> MediaActors { get; set; }
+        public List<MediaActors> MediaActors { get; set; }
     }
 }

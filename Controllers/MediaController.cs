@@ -127,7 +127,7 @@ namespace backendproject.Controllers
 
         [HttpGet]
         [Route("{mediaId}/actors")]
-        public async Task<ActionResult<List<MediaActor>>> GetMediaActors(Guid mediaId)
+        public async Task<ActionResult<List<MediaActors>>> GetMediaActors(Guid mediaId)
         {
             try
             {

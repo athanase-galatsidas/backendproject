@@ -9,6 +9,6 @@ namespace backendproject.Models
         [Key]
         public Guid ActorId { get; set; }
         public string Name { get; set; }
-        public ICollection<MediaActor> MediaActors { get; set; } = new List<MediaActor>();
+        public ICollection<MediaActors> MediaActors { get; set; } = new List<MediaActors>();
     }
 }

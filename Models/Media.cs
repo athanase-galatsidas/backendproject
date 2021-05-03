@@ -18,6 +18,6 @@ namespace backendproject.Models
         public int Episodes { get; set; }
         [Range(0, 10)]
         public double Rating { get; set; }
-        public ICollection<MediaActor> MediaActors { get; set; } = new List<MediaActor>();
+        public ICollection<MediaActors> MediaActors { get; set; } = new List<MediaActors>();
     }
 }
