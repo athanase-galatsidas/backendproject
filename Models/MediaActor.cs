@@ -9,6 +9,10 @@ namespace backendproject.Models
     {
         public Guid MediaId { get; set; }
         public Guid ActorId { get; set; }
+
+        [JsonIgnore]
         public Actor Actor { get; set; }
+        [JsonIgnore]
+        public Media Media { get; set; }
     }
 }

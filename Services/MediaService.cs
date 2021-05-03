@@ -12,10 +12,13 @@ namespace backendproject.Services
     {
         Task<List<Media>> GetMedias();
         Task<Media> GetMedia(Guid mediaId);
-        Task<MediaDTO> AddMedia(MediaDTO media);
+        Task<Media> AddMedia(Media media);
+        Task<Media> UpdateMedia(Media media);
         Task<List<Actor>> GetActors();
         Task<Actor> GetActor(Guid actorId);
         Task<Actor> AddActor(Actor actor);
+        Task<List<MediaActor>> GetMediaActors(Guid mediaId);
+        Task<List<MediaActor>> GetActorMedias(Guid actorId);
     }
 
     public class MediaService : IMediaService
@@ -39,14 +42,20 @@ namespace backendproject.Services
             return await _mediaRepository.GetMedia(mediaId);
         }
 
-        public async Task<MediaDTO> AddMedia(MediaDTO media)
+        public async Task<Media> AddMedia(Media media)
         {
-            Media newMedia = _mapper.Map<Media>(media);
-            newMedia.MediaId = Guid.NewGuid();
-            newMedia.MediaActors = new List<MediaActor>();
-            await _mediaRepository.AddMedia(newMedia);
+            // Media newMedia = _mapper.Map<Media>(media);
+            // newMedia.MediaId = Guid.NewGuid();
+            // newMedia.MediaActors = new List<MediaActor>();
+            // await _mediaRepository.AddMedia(newMedia);
+            // return media;
 
-            return media;
+            return await _mediaRepository.AddMedia(media);
+        }
+
+        public async Task<Media> UpdateMedia(Media media)
+        {
+            return await _mediaRepository.UpdateMedia(media);
         }
 
         public async Task<List<Actor>> GetActors()
@@ -62,6 +71,16 @@ namespace backendproject.Services
         public async Task<Actor> AddActor(Actor actor)
         {
             return await _mediaRepository.AddActor(actor);
+        }
+
+        public async Task<List<MediaActor>> GetMediaActors(Guid mediaId)
+        {
+            return await _mediaRepository.GetMediaActors(mediaId);
+        }
+
+        public async Task<List<MediaActor>> GetActorMedias(Guid actorId)
+        {
+            return await _mediaRepository.GetActorMedias(actorId);
         }
     }
 }

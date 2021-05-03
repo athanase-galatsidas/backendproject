@@ -57,11 +57,25 @@ namespace backendproject.Controllers
 
         [HttpPost]
         [Route("addmedia")]
-        public async Task<ActionResult<MediaDTO>> AddMedia(MediaDTO media)
+        public async Task<ActionResult<Media>> AddMedia(Media media)
         {
             try
             {
                 return new OkObjectResult(await _mediaService.AddMedia(media));
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
+        }
+
+        [HttpPut]
+        [Route("updatemedia")]
+        public async Task<ActionResult<Media>> UpdateMedia(Media media)
+        {
+            try
+            {
+                return new OkObjectResult(await _mediaService.UpdateMedia(media));
             }
             catch
             {
@@ -104,6 +118,34 @@ namespace backendproject.Controllers
             try
             {
                 return new OkObjectResult(await _mediaService.AddActor(actor));
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
+        }
+
+        [HttpGet]
+        [Route("{mediaId}/actors")]
+        public async Task<ActionResult<List<MediaActor>>> GetMediaActors(Guid mediaId)
+        {
+            try
+            {
+                return new OkObjectResult(await _mediaService.GetMediaActors(mediaId));
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
+        }
+
+        [HttpGet]
+        [Route("actors/{actorid}/media")]
+        public async Task<ActionResult<List<Actor>>> GetActorMedias(Guid actorId)
+        {
+            try
+            {
+                return new OkObjectResult(await _mediaService.GetActorMedias(actorId));
             }
             catch
             {

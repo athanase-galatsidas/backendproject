@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "e:\\Schoolwerk\\backendproject\\backendproject.csproj": {}
+    "E:\\Schoolwerk\\backendproject\\backendproject.csproj": {}
   },
   "projects": {
-    "e:\\Schoolwerk\\backendproject\\backendproject.csproj": {
+    "E:\\Schoolwerk\\backendproject\\backendproject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "e:\\Schoolwerk\\backendproject\\backendproject.csproj",
+        "projectUniqueName": "E:\\Schoolwerk\\backendproject\\backendproject.csproj",
         "projectName": "backendproject",
-        "projectPath": "e:\\Schoolwerk\\backendproject\\backendproject.csproj",
+        "projectPath": "E:\\Schoolwerk\\backendproject\\backendproject.csproj",
         "packagesPath": "C:\\Users\\LordSwaglington\\.nuget\\packages\\",
-        "outputPath": "e:\\Schoolwerk\\backendproject\\obj\\",
+        "outputPath": "E:\\Schoolwerk\\backendproject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backendproject.DataContext;
 
 namespace backendproject.Migrations
 {
     [DbContext(typeof(MediaContext))]
-    partial class MediaContextModelSnapshot : ModelSnapshot
+    [Migration("20210503012901_change04")]
+    partial class change04
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,7 +37,7 @@ namespace backendproject.Migrations
                     b.HasData(
                         new
                         {
-                            ActorId = new Guid("3e2ba825-78da-4b57-b5dd-05334b876634"),
+                            ActorId = new Guid("d781aeab-1396-4333-99dd-4c122f42a348"),
                             Name = "Rainn Wilson"
                         });
                 });
@@ -97,7 +99,7 @@ namespace backendproject.Migrations
                     b.HasData(
                         new
                         {
-                            MediaId = new Guid("44abf6ad-0706-468c-9c73-099a80ff7229"),
+                            MediaId = new Guid("26d3eadb-da83-4b0e-a71d-6392a39e609a"),
                             Episodes = 1,
                             Length = 90.0,
                             Name = "Shrek",
@@ -107,7 +109,7 @@ namespace backendproject.Migrations
                         },
                         new
                         {
-                            MediaId = new Guid("024cb65b-a85c-4cc0-9801-cc79bdf5d4f6"),
+                            MediaId = new Guid("7c0d13d5-7513-4132-a666-ea89089f41a1"),
                             Episodes = 6,
                             Length = 20.0,
                             Name = "The Office",
@@ -160,7 +162,7 @@ namespace backendproject.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("a78ecba7-9863-4d30-8c4b-05c380f71bd9"),
+                            UserId = new Guid("8331b3d2-f633-49ed-ab22-fafaccd3a343"),
                             Email = "bob@email.com",
                             IsAdmin = false,
                             Name = "Bob",
@@ -195,15 +197,13 @@ namespace backendproject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("backendproject.Models.Media", "Media")
+                    b.HasOne("backendproject.Models.Media", null)
                         .WithMany("MediaActors")
                         .HasForeignKey("MediaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Actor");
-
-                    b.Navigation("Media");
                 });
 
             modelBuilder.Entity("backendproject.Models.Actor", b =>

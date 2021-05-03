@@ -108,5 +108,19 @@ namespace backendproject.Controllers
                 return new StatusCodeResult(500);
             }
         }
+
+        [HttpDelete]
+        [Route("removeentry")]
+        public async Task<ActionResult<Entry>> DeleteEntry(Entry entry)
+        {
+            try
+            {
+                return new OkObjectResult(await _userService.DeleteEntry(entry));
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
+        }
     }
 }
