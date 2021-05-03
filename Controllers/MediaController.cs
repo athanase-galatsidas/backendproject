@@ -125,6 +125,20 @@ namespace backendproject.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("addactormedia")]
+        public async Task<ActionResult<Actor>> AddActorMedia(MediaActors mediaActors)
+        {
+            try
+            {
+                return new OkObjectResult(await _mediaService.AddActorMedia(mediaActors));
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
+        }
+
         [HttpGet]
         [Route("{mediaId}/actors")]
         public async Task<ActionResult<List<MediaActors>>> GetMediaActors(Guid mediaId)

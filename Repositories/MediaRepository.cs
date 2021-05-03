@@ -17,6 +17,7 @@ namespace backendproject.Repositories
         Task<List<Actor>> GetActors();
         Task<Actor> GetActor(Guid actorId);
         Task<Actor> AddActor(Actor actor);
+        Task<MediaActors> AddActorMedia(MediaActors mediaActors);
         Task<List<MediaActors>> GetMediaActors(Guid mediaId);
         Task<List<MediaActors>> GetActorMedias(Guid actorId);
     }
@@ -38,15 +39,9 @@ namespace backendproject.Repositories
         public async Task<Media> GetMedia(Guid mediaId)
         {
             Media media = await _context.Medias.Where(e => e.MediaId == mediaId).SingleOrDefaultAsync();
-            try
-            {
-                media.MediaActors = new List<MediaActors>();
-                media.MediaActors = await _context.MediaActors.Where(e => e.MediaId == mediaId).ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            media.MediaActors = new List<MediaActors>();
+            media.MediaActors = await _context.MediaActors.Where(e => e.MediaId == mediaId).ToListAsync();
+
             return media;
         }
 
@@ -87,6 +82,13 @@ namespace backendproject.Repositories
             return actor;
         }
 
+        public async Task<MediaActors> AddActorMedia(MediaActors mediaActors)
+        {
+            await _context.MediaActors.AddAsync(mediaActors);
+            await _context.SaveChangesAsync();
+            return mediaActors;
+        }
+
         public async Task<List<MediaActors>> GetMediaActors(Guid mediaId)
         {
             return await _context.MediaActors.Where(e => e.MediaId == mediaId).ToListAsync();
@@ -96,5 +98,7 @@ namespace backendproject.Repositories
         {
             return await _context.MediaActors.Where(e => e.ActorId == actorId).ToListAsync();
         }
+
+
     }
 }

@@ -17,6 +17,7 @@ namespace backendproject.Services
         Task<List<Actor>> GetActors();
         Task<Actor> GetActor(Guid actorId);
         Task<Actor> AddActor(Actor actor);
+        Task<MediaActors> AddActorMedia(MediaActors mediaActors);
         Task<List<MediaActors>> GetMediaActors(Guid mediaId);
         Task<List<MediaActors>> GetActorMedias(Guid actorId);
     }
@@ -71,6 +72,11 @@ namespace backendproject.Services
         public async Task<Actor> AddActor(Actor actor)
         {
             return await _mediaRepository.AddActor(actor);
+        }
+
+        public async Task<MediaActors> AddActorMedia(MediaActors mediaActors)
+        {
+            return await _mediaRepository.AddActorMedia(mediaActors);
         }
 
         public async Task<List<MediaActors>> GetMediaActors(Guid mediaId)
