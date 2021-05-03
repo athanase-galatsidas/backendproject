@@ -13,7 +13,6 @@ namespace backendproject.Models
         public string Name { get; set; }
         [Required]
         public string Email { get; set; }
-        [JsonIgnore]
         [Required]
         public string Password { get; set; }
         [JsonIgnore]
